@@ -2,6 +2,8 @@ const Discord = require('discord.js');
 const config = require('./config.json')
 const fs = require("fs");
 
+const token = process.env.TOKEN
+
 const bot = new Discord.Client({disableEveryone: true});
 bot.commands = new Discord.Collection();
 

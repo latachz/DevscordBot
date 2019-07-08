@@ -1,37 +1,46 @@
 const Discord = require('discord.js');
-const token = 'NTk3NTg3ODA1ODI0MDkwMTQy.XSKTVw.FYiYksnXMGgGMdmUaW3euk1HZPA';
+const config = require('./config.json')
+const fs = require("fs");
 
-const client = new Discord.Client();
+const bot = new Discord.Client({disableEveryone: true});
+bot.commands = new Discord.Collection();
 
-client.on('ready', async () => {
+
+fs.readdir("./commands/", (err, files) => {
+    if (err) console.error(err);
+
+    let jsfiles = files.filter(f => f.split(".").pop() === "js");
+    if(jsfiles.length <= 0) {
+        console.log("No commands to load!");
+        return;
+    }
+
+    console.log(`Loading ${jsfiles.length} commands!`);
+
+    jsfiles.forEach((f, i) => {
+        let props = require(`./commands/${f}`); 
+        console.log(`${i + 1}: ${f} loaded!`);
+        bot.commands.set(props.help.name, props);
+    })
+})
+
+bot.on('ready', async () => {
     console.log(`Bot is online!`)
 })
 
-client.on('message', msg => {
+bot.on('message', msg => {
     if(msg.author.bot) return;
     
     const args = msg.content.split(" ");
-    const cmd = args[0];
+    const command = args[0];
 
-    if (cmd === '/my_technologies') {    
-        function countStars(starsCount) {
-            let stars = "";
-            let i = 1;
-            while (i <= starsCount) {
-                stars = stars.concat("⭐");
-                i++;
-            }
-            return stars
-        }
-      const embed = new Discord.RichEmbed()
-        .setTitle('My technologies')
-        .addField(`${args[1]}`, `${countStars(args[2])}`, true)
-        .addField(`${args[3]}`, `${countStars(args[4])}`, true)
-        .addField(`${args[5]}`, `${countStars(args[6])}`, true)
-        .setAuthor(`${msg.author.username}`)
-        .setColor('#f50057')
-      msg.channel.send(embed);
-    }
+    const prefix = "/";
+
+    if(!command.startsWith(prefix)) return;
+
+    let cmd = bot.commands.get(command.slice(prefix.length))
+    if(cmd) cmd.run(bot, msg, args)
+
 });
 
-client.login(token);
+bot.login(config.token);

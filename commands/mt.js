@@ -5,7 +5,7 @@ module.exports.run = async (bot, msg, args) => {
         var stars = "";
         let i = 1;
         if(starsCount > 5) {
-            return msg.channel.send("Aż tak dobry debilu nie jestes")
+            return stars = "⭐⭐⭐⭐⭐" 
         }
         else {
             while (i <= starsCount) {

@@ -45,4 +45,4 @@ bot.on('message', msg => {
 
 });
 
-bot.login(config.token);
+bot.login(token);

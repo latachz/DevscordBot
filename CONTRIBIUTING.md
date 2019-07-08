@@ -22,6 +22,7 @@ module.exports.help = {
     name: "COMMAND NAME"
 }
 ```
+4. Add your command to "commands/help.js"
 5. PR your branch to DevscoreBot repo.
 
 ### Our Pledge

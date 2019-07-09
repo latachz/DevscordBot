@@ -6,7 +6,6 @@ const token = process.env.TOKEN
 const bot = new Discord.Client({disableEveryone: true});
 bot.commands = new Discord.Collection();
 
-
 fs.readdir("./commands/", (err, files) => {
     if (err) console.error(err);
 
@@ -44,4 +43,4 @@ bot.on('message', msg => {
 
 });
 
-bot.login(token);
+bot.login("NTk3NTg3ODA1ODI0MDkwMTQy.XSNvEA.nlPtqri_-5OPW5g0e6RVwizdylE");

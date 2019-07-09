@@ -29,8 +29,6 @@ module.exports.run = async (bot, msg, args, all) => {
         .then(msg.channel.send(resultsEmbed))
 	})
 	.catch(collected => {collected});
-
-
 }
 
 module.exports.help = {

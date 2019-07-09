@@ -5,7 +5,7 @@ module.exports.run = async (bot, msg, args) => {
         var stars = "";
         let i = 1;
         if(starsCount > 5) {
-            return msg.channel.send("Aż tak dobry debilu nie jestes")
+            starsCount = 5;
         }
         else {
             while (i <= starsCount) {
@@ -18,15 +18,15 @@ module.exports.run = async (bot, msg, args) => {
 
     var fieldsArray = [];
 
-    for(let i = 0; i < args.length - 1; i++) {
+    for(let i = 0; i < (args.length - 1) / 2; i++) {
         fieldsArray.push({
-            name: `${args[i + 1]}`,
-            value: `${countStars(args[i + 2])}`
+            name: `${args[2 * i + 1]}`,
+            value: `${countStars(args[2 * i + 2])}`
         });
     }
 
     msg.channel.send({embed: {
-        color: #447003,
+        color: 3447003,
         author: {
           name: msg.author.username,
           icon_url: msg.author.avatarURL

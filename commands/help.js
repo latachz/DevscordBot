@@ -10,7 +10,7 @@ module.exports.run = async (bot, msg, args) => {
         title: "Information about avaible commands",
         fields: [{
             name: "My technologies",
-            value: "/mt tech1 lvl(1-5) tech2 lvl(1-5) tech3 lvl(1-5)"
+            value: "/mt tech1 lvl(1-5) tech2 lvl(1-5) tech3 lvl(1-5) [...]"
           },
         ],
         timestamp: new Date(),

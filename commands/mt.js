@@ -5,7 +5,7 @@ module.exports.run = async (bot, msg, args) => {
         var stars = "";
         let i = 1;
         if(starsCount > 5) {
-            return stars = "⭐⭐⭐⭐⭐" 
+            starsCount = 5;
         }
         else {
             while (i <= starsCount) {
@@ -16,6 +16,15 @@ module.exports.run = async (bot, msg, args) => {
         }
     }
 
+    var fieldsArray = [];
+
+    for(let i = 0; i < (args.length - 1) / 2; i++) {
+        fieldsArray.push({
+            name: `${args[2 * i + 1]}`,
+            value: `${countStars(args[2 * i + 2])}`
+        });
+    }
+
     msg.channel.send({embed: {
         color: 3447003,
         author: {
@@ -23,19 +32,7 @@ module.exports.run = async (bot, msg, args) => {
           icon_url: msg.author.avatarURL
         },
         title: "My technologies",
-        fields: [{
-            name: `${args[1]}`,
-            value: `${countStars(args[2])}`
-          },
-          {
-            name: `${args[3]}`,
-            value: `${countStars(args[4])}`
-          },
-          {
-            name: `${args[5]}`,
-            value: `${countStars(args[6])}`
-          }
-        ],
+        fields: fieldsArray,
         timestamp: new Date(),
         footer: {
           icon_url: msg.author.avatarURL,

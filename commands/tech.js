@@ -2,7 +2,11 @@ const Discord = module.require("discord.js");
 const fs = require('fs')
 
 module.exports.run = (bot, msg, args) => {
-    let user = args[1]
+    let argsUser = args[1];
+
+    if (args === 1) return; 
+
+    // let user = args[1]
 
     function countStars(starsCount) {
         var stars = "";
@@ -22,7 +26,9 @@ module.exports.run = (bot, msg, args) => {
     data = fs.readFileSync(__dirname + "\\users.json");
     parsedData = JSON.parse(data)
 
-    var fields = parsedData[`${user}`].technologies;
+    //user = Discord.utils.get(message.server.members, name = `${argsUser}`, discriminator = 6885)
+
+    var fields = parsedData[`${argsUser}`].technologies;
 
     var fieldsArray = [];
 

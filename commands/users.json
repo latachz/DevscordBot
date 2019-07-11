@@ -1,0 +1,18 @@
+{
+    "LatachZ": {
+          "age": 16,
+          "technologies": [
+            {"name": "Elixir", "value": 4},
+            {"name": "Haskell", "value": 1},
+            {"name": "Erlang", "value": 3}
+          ]
+    },
+    "Marcin": {
+        "age": 20,
+        "technologies": [
+          {"name": "C#", "value": 5},
+          {"name": "Javascript", "value": 1},
+          {"name": "Go", "value": 1}
+        ]
+  }
+}

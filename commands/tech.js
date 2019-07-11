@@ -1,6 +1,9 @@
 const Discord = module.require("discord.js");
+const fs = require('fs')
 
-module.exports.run = async (bot, msg, args) => {
+module.exports.run = (bot, msg, args) => {
+    let user = args[1]
+
     function countStars(starsCount) {
         var stars = "";
         let i = 1;
@@ -16,22 +19,27 @@ module.exports.run = async (bot, msg, args) => {
         }
     }
 
+    data = fs.readFileSync(__dirname + "\\users.json");
+    parsedData = JSON.parse(data)
+
+    var fields = parsedData[`${user}`].technologies;
+
     var fieldsArray = [];
 
-    for(let i = 0; i < (args.length - 1) / 2; i++) {
+    fields.forEach(field => {
         fieldsArray.push({
-            name: `${args[2 * i + 1].charAt(0).toUpperCase() + args[2 * i + 1].slice(1)}`,
-            value: `${countStars(args[2 * i + 2])}`
-        });
-    }
+            name: `${field.name}`,
+            value: `${countStars(field.value)}`
+        })
+    })
 
     msg.channel.send({embed: {
         color: 3447003,
         author: {
-          name: msg.author.username,
+          name: user,
           icon_url: msg.author.avatarURL
         },
-        title: "My technologies:",
+        title: `${user}'s technologies:`,
         fields: fieldsArray,
         timestamp: new Date(),
         footer: {
@@ -41,17 +49,8 @@ module.exports.run = async (bot, msg, args) => {
       }
     });
 
-    let data = []
-
-    fieldsArray.forEach(field => {
-        data.push(field.name)
-        data.push(field.value.length)
-    })
-
-    console.log(data)
-
 }
 
 module.exports.help = {
-    name: "mt"
+    name: "tech"
 }

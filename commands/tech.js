@@ -23,7 +23,7 @@ module.exports.run = (bot, msg, args) => {
         }
     }
 
-    data = fs.readFileSync(__dirname + "\\users.json");
+    data = fs.readFileSync(__dirname + "/users.json");
     parsedData = JSON.parse(data)
 
     //user = Discord.utils.get(message.server.members, name = `${argsUser}`, discriminator = 6885)
@@ -42,10 +42,10 @@ module.exports.run = (bot, msg, args) => {
     msg.channel.send({embed: {
         color: 3447003,
         author: {
-          name: user,
+          name: argsUser,
           icon_url: msg.author.avatarURL
         },
-        title: `${user}'s technologies:`,
+        title: `${argsUser}'s technologies:`,
         fields: fieldsArray,
         timestamp: new Date(),
         footer: {
